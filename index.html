@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yangiliklar Sayti</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Yangiliklar Sayti</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Bosh sahifa</a></li>
+                <li><a href="about.html">Biz haqimizda</a></li>
+                <li><a href="contact.html">Aloqa</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="news-list">
+            <h2>Oxirgi yangiliklar</h2>
+            <article>
+                <h3><a href="news1.html">Yangilik 1 sarlavhasi</a></h3>
+                <p>Yangilik 1 qisqa tasnifi...</p>
+            </article>
+            <article>
+                <h3><a href="news2.html">Yangilik 2 sarlavhasi</a></h3>
+                <p>Yangilik 2 qisqa tasnifi...</p>
+            </article>
+            <!-- Ko'proq yangiliklar qo'shish mumkin -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Yangiliklar Sayti</p>
+    </footer>
+    <script>
+        fetch('/api/news')
+            .then(response => response.json())
+            .then(data => {
+                const newsList = document.querySelector('.news-list');
+                data.forEach(news => {
+                    const article = document.createElement('article');
+                    article.innerHTML = `
+                        <h3><a href="news.html?id=${news._id}">${news.title}</a></h3>
+                        <p>${news.description}</p>
+                    `;
+                    newsList.appendChild(article);
+                });
+            });
+    </script>
+    
+</body>
+</html>
